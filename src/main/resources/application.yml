@@ -11,5 +11,19 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    enabled: true
   profiles:
     default: local
+
+jwt:
+  secret:
+    access:
+    refresh:
+  access-validity-minutes: 15
+  refresh-validity-days: 5
