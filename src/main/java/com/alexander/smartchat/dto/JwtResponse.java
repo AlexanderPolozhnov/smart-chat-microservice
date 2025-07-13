@@ -1,8 +1,6 @@
 package com.alexander.smartchat.dto;
 
-public record JwtResponse(
-    String accessToken,
-    String refreshToken,
-    String tokenType
-) {
+import java.io.Serializable;
+
+public record JwtResponse(String accessToken, String refreshToken) implements Serializable {
 }
