@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -14,8 +16,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString()
-@EqualsAndHashCode()
 public class User {
 
     @Id
@@ -41,6 +41,9 @@ public class User {
 
     @Column(nullable = false)
     private Instant updatedAt;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Chat> chats = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
