@@ -49,6 +49,9 @@ kafka:
   topic:
     name: chat-messages
 
+chat:
+  message-cache-ttl: PT24H
+
 jwt:
   secret:
     access:

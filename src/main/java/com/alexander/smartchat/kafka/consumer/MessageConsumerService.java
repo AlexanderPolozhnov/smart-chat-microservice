@@ -7,10 +7,10 @@ import com.alexander.smartchat.entity.User;
 import com.alexander.smartchat.repository.ChatMessageRepository;
 import com.alexander.smartchat.repository.ChatRepository;
 import com.alexander.smartchat.repository.UserRepository;
+import com.alexander.smartchat.service.redis.RedisCacheService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +26,10 @@ public class MessageConsumerService {
     private final ChatMessageRepository messageRepository;
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
-    private final RedisTemplate<String, ChatMessage> redisTemplate;
+    private final RedisCacheService redisCacheService;
     private final ExecutorService executor = Executors.newFixedThreadPool(4);
+
+    private static final int RECENT_LIMIT = 100;
 
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "smartchat-group")
     public void consumeMessage(MessageRequestDto dto) {
@@ -48,12 +50,12 @@ public class MessageConsumerService {
             .text(dto.text())
             .sentAt(Instant.now())
             .build();
+
         ChatMessage saved = messageRepository.save(message);
 
-        String key = "chat:" + dto.chatId() + ":recent";
-        redisTemplate.opsForList().leftPush(key, saved);
-        redisTemplate.opsForList().trim(key, 0, 99);
+        redisCacheService.cacheMessage(chat.getId(), saved, RECENT_LIMIT);
 
-        log.info("Сообщение сохраняется и кэшируется под ключом {}", key);
+        log.info("Сообщение сохранено и добавлено в кеш чата {}", chat.getId());
     }
 }
+
