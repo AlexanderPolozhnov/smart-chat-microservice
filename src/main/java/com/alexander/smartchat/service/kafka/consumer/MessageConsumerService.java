@@ -1,4 +1,4 @@
-package com.alexander.smartchat.kafka.consumer;
+package com.alexander.smartchat.service.kafka.consumer;
 
 import com.alexander.smartchat.dto.MessageRequestDto;
 import com.alexander.smartchat.entity.Chat;
