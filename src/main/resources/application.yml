@@ -1,0 +1,42 @@
+spring:
+
+  profiles:
+    default: local
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/smart_chat_db
+    username: postgres
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    enabled: true
+
+  security:
+    user:
+      name: none
+
+  graphql:
+    cors:
+      allowed-origins: *
+
+jwt:
+  secret:
+    access:
+    refresh:
+  access-validity-minutes: 15
+  refresh-validity-days: 5
