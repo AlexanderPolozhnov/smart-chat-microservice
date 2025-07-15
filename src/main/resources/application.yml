@@ -58,3 +58,12 @@ jwt:
     refresh:
   access-validity-minutes: 15
   refresh-validity-days: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,httpexchanges
+  endpoint:
+    health:
+      show-details: always
