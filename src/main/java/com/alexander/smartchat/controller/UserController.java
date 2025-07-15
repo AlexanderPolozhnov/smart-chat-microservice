@@ -3,6 +3,7 @@ package com.alexander.smartchat.controller;
 import com.alexander.smartchat.dto.UserRequestDto;
 import com.alexander.smartchat.dto.UserResponseDto;
 import com.alexander.smartchat.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Пользователи", description = "CRUD операции над пользователями")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor

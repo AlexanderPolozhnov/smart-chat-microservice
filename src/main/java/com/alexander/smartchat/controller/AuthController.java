@@ -3,6 +3,7 @@ package com.alexander.smartchat.controller;
 import com.alexander.smartchat.dto.*;
 import com.alexander.smartchat.service.AuthService;
 import com.alexander.smartchat.service.BlacklistTokenService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Аутентификация", description = "Регистрация, вход, выход и обновление токенов")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
