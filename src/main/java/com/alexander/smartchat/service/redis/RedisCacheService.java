@@ -2,6 +2,7 @@ package com.alexander.smartchat.service.redis;
 
 import com.alexander.smartchat.entity.ChatMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Setter
 public class RedisCacheService {
 
     private final RedisTemplate<String, ChatMessage> messageRedisTemplate;
