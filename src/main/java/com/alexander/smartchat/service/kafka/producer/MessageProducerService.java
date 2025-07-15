@@ -1,4 +1,4 @@
-package com.alexander.smartchat.kafka.producer;
+package com.alexander.smartchat.service.kafka.producer;
 
 import com.alexander.smartchat.dto.MessageRequestDto;
 import lombok.RequiredArgsConstructor;
