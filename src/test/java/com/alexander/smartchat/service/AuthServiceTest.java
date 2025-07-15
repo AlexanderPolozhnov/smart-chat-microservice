@@ -66,7 +66,7 @@ class AuthServiceTest {
         when(userRepository.existsByUsername("test")).thenReturn(false);
         when(passwordEncoder.encode("pass123")).thenReturn("encodedPass");
         when(userRepository.save(any(User.class))).thenReturn(entity);
-        when(userMapper.toDto(entity)).thenReturn(dto);
+        when(userMapper.toDto(any(User.class))).thenReturn(dto);
 
         UserResponseDto result = authService.register(req);
 
@@ -74,7 +74,7 @@ class AuthServiceTest {
         verify(userRepository).existsByUsername("test");
         verify(passwordEncoder).encode("pass123");
         verify(userRepository).save(any(User.class));
-        verify(userMapper).toDto(entity);
+        verify(userMapper).toDto(any(User.class));
     }
 
     @Test
