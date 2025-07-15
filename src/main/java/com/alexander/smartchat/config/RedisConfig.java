@@ -1,6 +1,7 @@
 package com.alexander.smartchat.config;
 
 import com.alexander.smartchat.dto.JwtResponse;
+import com.alexander.smartchat.entity.ChatMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,4 +44,14 @@ public class RedisConfig {
         tpl.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         return tpl;
     }
+
+    @Bean
+    public RedisTemplate<String, ChatMessage> messageRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, ChatMessage> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        return template;
+    }
+
 }
