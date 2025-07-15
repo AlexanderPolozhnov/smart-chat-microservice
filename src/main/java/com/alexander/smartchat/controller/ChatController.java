@@ -3,6 +3,7 @@ package com.alexander.smartchat.controller;
 import com.alexander.smartchat.dto.ChatRequestDto;
 import com.alexander.smartchat.dto.ChatResponseDto;
 import com.alexander.smartchat.service.ChatService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Чаты", description = "Создание чата, список чатов пользователя, управление участниками и удаление")
 @RestController
 @RequestMapping("/api/chats")
 @RequiredArgsConstructor

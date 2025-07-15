@@ -4,6 +4,7 @@ import com.alexander.smartchat.dto.MessageResponseDto;
 import com.alexander.smartchat.dto.MessageSearchDto;
 import com.alexander.smartchat.dto.MessageStatsDto;
 import com.alexander.smartchat.service.MessageService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Чтение сообщений", description = "Получение истории, поиск и статистика по сообщениям")
 @RestController
 @RequestMapping("/api/messages")
 @RequiredArgsConstructor
