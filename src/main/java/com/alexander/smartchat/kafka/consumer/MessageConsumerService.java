@@ -4,8 +4,8 @@ import com.alexander.smartchat.dto.MessageRequestDto;
 import com.alexander.smartchat.entity.Chat;
 import com.alexander.smartchat.entity.ChatMessage;
 import com.alexander.smartchat.entity.User;
-import com.alexander.smartchat.repository.ChatMessageRepository;
 import com.alexander.smartchat.repository.ChatRepository;
+import com.alexander.smartchat.repository.MessageRepository;
 import com.alexander.smartchat.repository.UserRepository;
 import com.alexander.smartchat.service.redis.RedisCacheService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 public class MessageConsumerService {
 
-    private final ChatMessageRepository messageRepository;
+    private final MessageRepository messageRepository;
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
     private final RedisCacheService redisCacheService;
