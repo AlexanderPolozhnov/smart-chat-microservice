@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres/smart_chat_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      host: smartchat_redis
+      port: 6379
+  kafka:
+    bootstrap-servers: kafka:9092
+
+jwt:
+  secret:
+    access: czhuUGpleERKNHQ2ZnNJVUlVaGhYcWxrdFhqWGRrY3l5Z0RWVjVJZXBZcUJUbXY0b1hGRlIyR3drSXhCTXpyN09FSFhFSGQzN3c9PQ==
+    refresh: ekwydmZ5bm92eHJmL2twRjlPMm00TkNXS0pvT05TVEpQLzdzOUoyakVHM2lmaUtDR3lsYVo4ZkRlM1BjaDA1QXdBekthdzlyT01OZz09
+  access-validity-minutes: 30
+  refresh-validity-days: 5

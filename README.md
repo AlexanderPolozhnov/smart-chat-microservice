@@ -3,7 +3,7 @@
 Полнофункциональный микросервис для общения в реальном времени, разработанный на Spring Boot с использованием Kafka,
 Redis и PostgreSQL.
 
-## ? Особенности проекта
+## Особенности проекта
 
 1. **Аутентификация и авторизация (Spring Security + JWT)**
     - Генерация Access и Refresh токенов
@@ -30,7 +30,7 @@ Redis и PostgreSQL.
 6. **Инфраструктура**
     - **Docker Compose**: PostgreSQL, Redis, Zookeeper, Kafka, приложение
 
-## ? Быстрый старт
+## Быстрый старт
 
 ```bash
 # Клонирование репозитория
@@ -52,7 +52,7 @@ docker-compose exec app java -jar /app/app.jar
 * Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 * Actuator health: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
 
-## ? Структура проекта
+## Структура проекта
 
 ```
 src/
@@ -74,13 +74,15 @@ src/
    resources/
       db/changelog/
       application.yml
+      application-local.yml (.gitignore)
+      application-docker.yml
    test/                      # Unit & Integration tests
 docker-compose.yml
 Dockerfile
 README.md
 ```
 
-## ? Конфигурация
+## Конфигурация
 
 ### application.yml
 
@@ -157,7 +159,7 @@ management:
       show-details: always
 ```
 
-## ? Порты сервисов
+## Порты сервисов
 
 | Сервис        | Порт |
 |---------------|------|
@@ -167,7 +169,7 @@ management:
 | Kafka Broker  | 9092 |
 | SmartChat App | 8080 |
 
-## ? Тестирование
+## Тестирование
 
 ```bash
 # Unit + WebMvc тесты
@@ -177,7 +179,7 @@ mvn test
 mvn jacoco:report
 ```
 
-## ? Демонстрация
+## Демонстрация
 
 ![Swagger UI](docs/swagger-screenshot.png)
 
