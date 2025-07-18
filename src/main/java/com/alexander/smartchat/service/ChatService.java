@@ -7,6 +7,7 @@ import com.alexander.smartchat.entity.User;
 import com.alexander.smartchat.mapper.ChatMapper;
 import com.alexander.smartchat.repository.ChatRepository;
 import com.alexander.smartchat.repository.UserRepository;
+import com.alexander.smartchat.service.redis.RedisCacheService;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
     private final ChatMapper chatMapper;
+    private final RedisCacheService redisCacheService;
 
     public List<ChatResponseDto> getUserChats(UUID userId) {
         return chatRepository.findAll().stream()
@@ -56,5 +58,6 @@ public class ChatService {
         Chat chat = chatRepository.findById(chatId)
             .orElseThrow(() -> new ResourceNotFoundException("Чат с id " + chatId + " не был найден"));
         chatRepository.delete(chat);
+        redisCacheService.clearChatCache(chatId);
     }
 }

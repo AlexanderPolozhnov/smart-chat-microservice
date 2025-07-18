@@ -3,7 +3,9 @@ package com.alexander.smartchat.controller;
 import com.alexander.smartchat.dto.MessageResponseDto;
 import com.alexander.smartchat.dto.MessageSearchDto;
 import com.alexander.smartchat.dto.MessageStatsDto;
+import com.alexander.smartchat.entity.ChatMessage;
 import com.alexander.smartchat.service.MessageService;
+import com.alexander.smartchat.service.redis.RedisCacheService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class MessageController {
 
     private final MessageService messageService;
+    private final RedisCacheService redisCacheService;
 
     @GetMapping
     public ResponseEntity<List<MessageResponseDto>> getMessages(
@@ -30,6 +33,15 @@ public class MessageController {
     ) {
         return ResponseEntity.ok(messageService.getMessages(chatId, limit));
     }
+
+    @GetMapping("/recent")
+    public ResponseEntity<List<ChatMessage>> getRecent(
+        @RequestParam UUID chatId,
+        @RequestParam(defaultValue = "50") int limit
+    ) {
+        return ResponseEntity.ok(redisCacheService.getRecentMessages(chatId, limit));
+    }
+
 
     @GetMapping("/search")
     public ResponseEntity<MessageSearchDto> search(
