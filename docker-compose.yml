@@ -37,9 +37,11 @@ services:
     ports:
       - "2181:2181"
     healthcheck:
-      test: [ "CMD", "echo ruok | nc localhost 2181" ]
+      test: [ "CMD-SHELL", "zookeeper-shell localhost:2181 ls / || exit 1" ]
       interval: 10s
-      retries: 5
+      timeout: 10s
+      retries: 10
+      start_period: 30s
 
   kafka:
     image: confluentinc/cp-kafka:7.2.15

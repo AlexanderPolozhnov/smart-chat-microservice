@@ -1,14 +1,13 @@
-FROM maven:3.8.5-openjdk-17-slim AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /workspace
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests -B
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-ARG JAR_FILE=target/*.jar
-COPY --from=build /workspace/${JAR_FILE} app.jar
+COPY --from=build /workspace/target/*.jar app.jar
 RUN addgroup --system spring && adduser --system spring --ingroup spring
 USER spring:spring
 EXPOSE 8080
